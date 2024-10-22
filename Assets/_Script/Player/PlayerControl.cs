@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float waterSpeed;
     [SerializeField] private float fallingSpeed;
+    public bool hasFlippers;
 
 
     [Header("Inputs"), HideInInspector]
@@ -14,12 +15,15 @@ public class PlayerControl : MonoBehaviour
     private InputAction movements;
     //private InputAction ;
 
+    [Header("UnderWaterStats")]
+    [SerializeField] private float horizontaleForces;
+    [SerializeField] private float UpForces;
+    [SerializeField] private float DownForces;
+
     [Header("Others")]
-    [SerializeField] private float returnSpeed;
     private Transform _transform;
     private bool isUnderWater;
     Rigidbody2D rb;
-
 
     private void Awake()
     {
@@ -51,15 +55,16 @@ public class PlayerControl : MonoBehaviour
 
     private void Movements()
     {
-        if(!isUnderWater)
+        if (!isUnderWater)
         {
             Vector2 displacementAxe = movements.ReadValue<Vector2>();
             _transform.position = new Vector2(_transform.position.x + (displacementAxe.x * speed), _transform.position.y);
         }
         else
         {
+            float force = hasFlippers == true ? waterSpeed * 2 : waterSpeed;
             Vector2 DisplacementAxe = movements.ReadValue<Vector2>();
-            rb.AddForce((DisplacementAxe * waterSpeed), ForceMode2D.Impulse);
+            rb.AddForce((DisplacementAxe * force), ForceMode2D.Impulse);
         }
     }
 
@@ -67,7 +72,6 @@ public class PlayerControl : MonoBehaviour
     {
         isUnderWater = false;
         rb.gravityScale = 1;
-        rb.mass = 1;
     }
 
     private void SwitchToWater()
@@ -75,7 +79,6 @@ public class PlayerControl : MonoBehaviour
         isUnderWater = true;
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0.01f;
-        rb.mass = 1f;
     }
 
 
