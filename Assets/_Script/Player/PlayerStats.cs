@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -44,12 +45,22 @@ public class PlayerStats : MonoBehaviour
         else if (oxygen <= 0)
         {
             oxygen = 0;
-            //TODO trigger damages + screen fade black
+            OxygensDamagesEverySecondes(5);
+            //TODO Screen fade black
         }
     }
 
     public int GetHealth() { return health; }
 
     public int GetOxygen() { return oxygen; }
+
+    private IEnumerator OxygensDamagesEverySecondes(int damages)
+    {
+        while (oxygen <= 0)
+        {
+            AddNHealth(damages);
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
 }
