@@ -1,7 +1,13 @@
+
+
+using UnityEngine;
+
 public class ItemContainerData
 {
     private Items itemContained;
     private int itemNumber;
+
+    public int GetNumber() {  return itemNumber; }
 
     public Items GetItemContained() { return itemContained; }
 
@@ -9,12 +15,14 @@ public class ItemContainerData
     {
         if(itemContained == null)
         {
+            Debug.Log("ajout item");
             itemContained = item;
             itemNumber = number;
             return true;
         }
-        else if (itemContained.name == item.name && item.stackable)
+        if (itemContained.name == item.name && item.stackable)
         {
+            Debug.Log("ajout nb");
             itemNumber += number;
             return true;
         }

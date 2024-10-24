@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public abstract class Items : ScriptableObject
+public class Items : ScriptableObject
 {
     public string name;
     public bool stackable;
     public Sprite sprite;
 }
 
-public abstract class Equipables : Items
+public class Equipables : Items
 {
-    public bool stackable = false;
+
 }
 
-public abstract class ToolsBarEquipable : Items
+public class ToolsBarEquipable : Items
 {
-    public bool stackable = false;
+
 }
 
 
@@ -52,5 +52,5 @@ public class Armor : Equipables
 [CreateAssetMenu(fileName = "Ressource", menuName = "Items/Ressource")]
 public class Ressource : Items
 {
-    public bool stackable = true;
+
 }

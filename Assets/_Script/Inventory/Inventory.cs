@@ -3,9 +3,14 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public int numberOfSlots;
+
     [SerializeField] private GameObject slot;
     [SerializeField] private Transform slotsPanel;
-    InventoryData data;
+    
+    private InventoryData data;
+
+    public Items testItem;
+    public Items testItem2;
 
     void Start()
     {
@@ -13,17 +18,25 @@ public class Inventory : MonoBehaviour
         data.Initialize(numberOfSlots);
     }
 
-    public ItemContainer AddItem(Items item, int number)
+    public void AddItem(Items item, int number)
     {
         for (int i = 0; i < data.GetItemContainerList().Count; i++)
         {
-            if (!data.GetItemContainerList()[i].HasItem())
+            if (!data.GetItemContainerList()[i].HasItem() || data.GetItemContainerList()[i].GetItem().name == item.name)
             {
                 data.GetItemContainerList()[i].AddItem(item, number);
-                return data.GetItemContainerList()[i];
+                return;
             }
         }
-        return null;
     }
 
+    public void TestAddItem()
+    {
+        AddItem(testItem, 1);
+    }
+
+    public void TestAddItem2()
+    {
+        AddItem(testItem2, 1);
+    }
 }

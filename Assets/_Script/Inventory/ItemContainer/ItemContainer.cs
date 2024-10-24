@@ -23,11 +23,13 @@ public class ItemContainer : MonoBehaviour
         view.Reset();
     }
 
-    public void AddItem(Items item, int itemNumber)
+    public Items GetItem() { return data.GetItemContained(); }
+
+    public void AddItem(Items item, int number)
     {
-        if(data.TryAddItem(item, itemNumber))
+        if(data.TryAddItem(item, number))
         {
-            view.Update(item.sprite, itemNumber);
+            view.Update(item.sprite, data.GetNumber());
         }
     }
 

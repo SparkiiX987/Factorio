@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class ItemContainerView
 
     public void Update(Sprite sprite, int number)
     {
+        Debug.Log("update sprite" + number);
         itemIamge.sprite = sprite;
         if(number > 0)
         {
